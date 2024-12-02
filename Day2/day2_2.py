@@ -46,9 +46,6 @@ def is_safe(og_list):
     li = og_list.copy()
     is_strictly_monotonic_res = is_strictly_monotonic(li)
     is_diff_bound_res = diff_bound(li, 1, 3)
-    print(og_list)
-    print(is_diff_bound_res)
-    print(is_strictly_monotonic_res)
     if is_strictly_monotonic_res is None and is_diff_bound_res is None:
         return True
     if is_strictly_monotonic_res is not None:
@@ -70,7 +67,6 @@ def is_safe(og_list):
     if is_strictly_monotonic(li) is None and diff_bound(li, 1, 3) is None:
         return True
     else:
-        print("NOPE")
         return False
 
 
