@@ -3,10 +3,29 @@
 # Created: 2024-12-05
 # Description: Given some rule of ordering, check if they apply on a list, if not, reorder it according to the rules
 
+import time
+from functools import cmp_to_key
+
+start_time = time.time()
+
 parsing_status = 0
 rules_set = {}
 
 total_sigma = 0
+
+
+def custom_comparator(x, y):
+    rules_1 = rules_set.get(x, [])
+    rules_2 = rules_set.get(y, [])
+    if y in rules_1:
+        return -1
+    elif x in rules_2:
+        return 1
+    else:
+        return 0
+
+
+key_func = cmp_to_key(custom_comparator)
 
 
 def do_contradict(computed_slice, rules):
@@ -22,6 +41,7 @@ def match_ruleset(li):
         if do_contradict(li[0:i], rules):
             return False
     return True
+
 
 # Naive Algorithm
 # If rules is broken, place the element at the beginning and restart check for order
@@ -60,10 +80,16 @@ while True:
             continue
 
         # do reorder
-        do_reorder(print_set)
+        # do_reorder(print_set)
+        print_set.sort(key=key_func)
         mid_print_set = len(print_set) // 2
         total_sigma += print_set[mid_print_set]
 
 inp.close()
 
 print(total_sigma)
+print("--- %s seconds ---" % (time.time() - start_time))
+
+# Perf Analysis
+# Using do_reorder was roughly 6 seconds
+# Using my custom comparator in python sort function, it takes less than 0.01 sec
