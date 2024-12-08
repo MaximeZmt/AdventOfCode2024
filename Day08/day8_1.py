@@ -1,7 +1,7 @@
 # Filename: day8_1.py
 # Author: Maxime Zammit
 # Created: 2024-12-08
-# Description: ?
+# Description: antennas antinode computation v1
 
 from itertools import combinations
 
